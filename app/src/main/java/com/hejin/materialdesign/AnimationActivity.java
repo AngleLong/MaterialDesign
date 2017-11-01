@@ -1,6 +1,7 @@
 package com.hejin.materialdesign;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -46,12 +47,21 @@ public class AnimationActivity extends AppCompatActivity implements OnClickListe
                 intent = new Intent(this, AnimationResultActivity.class);
                 ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
                 break;
-            default:
+            case 1:
                 /*演示这里主要是使用ActivityOptionsCompat.makeScaleUpAnimation(source, startX, startY, startWidth, startHeight)
                   * 这个是在4.x上使用的,可实现新的Activity从某个固定的坐标以某个大小扩大至全屏*/
-                optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(iv, width, height, 480  ,960);
+                optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(iv, width, height, 480, 960);
                 intent = new Intent(this, AnimationResultActivity.class);
                 ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
+                break;
+            default:/*实现共享动画*/
+                if (Build.VERSION.SDK_INT > 20) {
+                    intent = new Intent(this, AnimationResultActivity.class);
+                    optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(AnimationActivity.this, iv, "transitionImg");
+                    ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
+                } else {
+                    startActivity(new Intent(AnimationActivity.this, AnimationResultActivity.class));
+                }
                 break;
         }
     }

@@ -243,10 +243,10 @@ rect.setOnClickListener(new View.OnClickListener() {  
             Intent intent = new Intent(this, SecondActivity.class);
             ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
     ```
-- ActivityOptionsCompat.makeScaleUpAnimation(source, startX, startY, startWidth, startHeight)
-    - source 代表共享的View
-    - startX 代表从本页面的开始X轴的位置
-    - startY 代表从本页面的开始Y轴的位置
+- ActivityOptionsCompat.makeScaleUpAnimation(source, startX, startY, startWidth, startHeight)(从指定位置不断方法一个View,进行过度)
+    - source 代表共享的View(以那个View为基准)
+    - startX 代表从本页面的开始X轴的位置(以source为基准点的位置)
+    - startY 代表从本页面的开始Y轴的位置(以source为基准点的位置)
     - startWidth 弹出的Activity开始的宽度
     - startHeight 弹出的Activity开始的高度
     ```
@@ -262,4 +262,71 @@ rect.setOnClickListener(new View.OnClickListener() {  
                     int width = location[0];
                     int height = location[1];    
     ```
+    
+- ActivityOptionsCompat.makeThumbnailScaleUpAnimation(source, thumbnail, startX, startY)
+    > 这个动画和makeScaleUpAnimation非常相似,只不过这里是放大一个图片,最后过度到一个新的activity
+
 - ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElement, sharedElementName)    
+    > 这个实现起来就有点复杂了,共享元素动画
+
+    - 首先在跳转页面的共享元素设置**android:transitionName="transitionImg"**(其中这个名字可以随便更改)
+    - 在跳转只有准备共享的元素设置**android:transitionName="transitionImg"**(其中这个名字可以随便更改)
+    - 跳转的逻辑
+    
+    ```
+        if (Build.VERSION.SDK_INT > 20) {
+            Intent intent = new Intent(this, AnimationResultActivity.class);
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(AnimationActivity.this, iv, "transitionImg");
+            ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
+        } else {
+            startActivity(new Intent(AnimationActivity.this, AnimationResultActivity.class));
+        }
+    ```
+- ActivityOptionsCompat.makeSceneTransitionAnimation((Activity arg0, Pair<View, String>...  arg1)
+    > 这个是基于上面的动画,但是可以指定多个共享元素,可以标明多个pair对象
+    
+    ps: 如果要是使用多个共享元素的时候要用下面的代码进行创建pair
+    ```
+    Pair<View, String> imagePair = Pair.create(mImageView, getString(R.string.image));
+    ```
+
+- 上面都是预设的动画,如果你想换动画的效果的话该如何实现呢?
+    >系统预设的几种动画效果
+     
+         - change_bounds
+         - change_clip_bounds
+         - change_transition
+         - change_image_transition
+         - change_scroll
+     
+    - 首先在res目录下创建一个transition文件夹,然后在创建新的xml文件,这里举个例子:如果是change_bounds,则代码这么写
+        
+        ```
+        <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+            <changeBounds />
+            //这里也可以制动动画时长和插值器
+            <changeBounds
+                 android:interpolator="@android:interpolator/accelerate_decelerate"
+                 android:duration="500"/>            
+        </transitionSet>
+        ```
+        如果是change_clip_bounds则代码这么写
+        ```
+        <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+            <changeClipBounds />
+        </transitionSet>
+        ```
+    - 使用方法(在style.xml中配置我们的theme)
+        ```
+        <resources>
+            <style name="AppTheme" parent="Theme.AppCompat.Light">
+                <item name="android:windowContentTransitions">true</item>
+                <item name="android:windowAllowEnterTransitionOverlap">true</item>
+                <item name="android:windowAllowReturnTransitionOverlap">true</item>
+                <item name="android:windowEnterTransition">@android:transition/slide_bottom</item>
+                <item name="android:windowExitTransition">@android:transition/slide_bottom</item>
+                <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
+                <item name="android:windowSharedElementExitTransition">@transition/change_bounds</item>
+            </style>
+        </resources>
+        ```
