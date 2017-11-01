@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!--添加的一些属性-->
+        <!--<item name="textColorPrimary">@color/white</item>&lt;!&ndash;标题栏文字颜色&ndash;&gt;-->
+        <item name="windowNoTitle">true</item><!--去掉标题栏-->
+        <item name="windowActionBar">false</item><!--不显示Actionbar-->
     </style>
 
 </resources>
