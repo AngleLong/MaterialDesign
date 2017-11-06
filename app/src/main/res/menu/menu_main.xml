@@ -6,5 +6,47 @@
         android:id="@+id/setting"
         android:title="Setting"
         android:titleCondensed="setting"
-        android:visible="true"/>
+        android:visible="true"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/Tab"
+                android:title="标题1"
+                android:titleCondensed="setting"
+                android:visible="true"
+                app:showAsAction="ifRoom|collapseActionView"/>
+            <item
+                android:id="@+id/Tab1"
+                android:title="标题2"
+                android:titleCondensed="setting"
+                android:visible="true"
+                app:showAsAction="ifRoom|collapseActionView"/>
+            <item
+                android:id="@+id/Tab2"
+                android:title="标题3"
+                android:titleCondensed="setting"
+                android:visible="true"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/Tab3"
+        android:title="组合"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/item1"
+                android:title="组合1"/>
+
+            <item
+                android:id="@+id/item2"
+                android:title="组合2"/>
+            <item
+                android:id="@+id/item3"
+                android:title="组合3"/>
+            <item
+                android:id="@+id/item4"
+                android:title="组合4"/>
+        </menu>
+    </item>
 </menu>

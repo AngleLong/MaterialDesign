@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,9 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void RevealAnimator(View view) {
-        Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, 0, view.getWidth());
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.setDuration(1000);
-        animator.start();
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, 0, view.getWidth());
+            animator.setInterpolator(new AccelerateDecelerateInterpolator());
+            animator.setDuration(1000);
+            animator.start();
+        } else {
+            Toast.makeText(this, "5.0以下不支持", Toast.LENGTH_SHORT).show();
+        }
     }
 }

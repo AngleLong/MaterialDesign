@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class ToolBarActivity extends AppCompatActivity {
     private Toolbar mToolBar;
     private boolean isAssociatedActionBar;
+    private Toolbar mZhiHuToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,20 @@ public class ToolBarActivity extends AppCompatActivity {
         } else {/*不关联ActionBar的处理*/
             noAssociatedActionBar();
         }
+
+        initZhiHuToolBar();
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/3 17:15
+     * description : 初始化知乎的ToolBar
+     * instructions : 实现ToolBar的ToolBar
+     */
+    private void initZhiHuToolBar() {
+        mZhiHuToolBar = (Toolbar) findViewById(R.id.zhiHu);
+        mZhiHuToolBar.inflateMenu(R.menu.menu_zhihu);
+        mZhiHuToolBar.setNavigationIcon(R.mipmap.ic_zhbook_show_directory);
     }
 
     /**
@@ -103,6 +118,8 @@ public class ToolBarActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.setting:
                 Toast.makeText(ToolBarActivity.this, "点击setting按钮", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.Tab3:/*组合*/
                 break;
         }
         return super.onOptionsItemSelected(item);

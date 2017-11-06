@@ -14,6 +14,103 @@
 - 退出: 一个退出的过度动画,决定了Activity中所有试图怎么退出屏幕;
 - 共享元素: 一个共享元素过度动画决定两个Activity之间的过渡,怎么共享他们的视图. 
 
+###1.2 主要实现类(ActivityOptionsCompat)
+- ActivityOptionsCompat.makeCustomAnimation(context, enterResId, exitResId)
+    ```
+            //(这个动画类似于overridePendingTransition()这个动画)
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_bottom_in, R.anim.slide_bottom_out);
+            Intent intent = new Intent(this, SecondActivity.class);
+            ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
+    ```
+- ActivityOptionsCompat.makeScaleUpAnimation(source, startX, startY, startWidth, startHeight)(从指定位置不断方法一个View,进行过度)
+    - source 代表共享的View(以那个View为基准)
+    - startX 代表从本页面的开始X轴的位置(以source为基准点的位置)
+    - startY 代表从本页面的开始Y轴的位置(以source为基准点的位置)
+    - startWidth 弹出的Activity开始的宽度
+    - startHeight 弹出的Activity开始的高度
+    ```
+            //这个是在4.x上使用的,可实现新的Activity从某个固定的坐标以某个大小扩大至全屏
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(iv, width, height, 0, 0);
+            intent = new Intent(this, AnimationResultActivity.class);
+            ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());            
+    ```
+    这里有个问题注意就是,当你在RecycleView这种控件中获取子条目的位置的时候要注意,我使用的是下面的这个方法:
+    ```
+                    int[] location = new int[2];
+                    view.getLocationOnScreen(location);
+                    int width = location[0];
+                    int height = location[1];    
+    ```
+    
+- ActivityOptionsCompat.makeThumbnailScaleUpAnimation(source, thumbnail, startX, startY)
+    > 这个动画和makeScaleUpAnimation非常相似,只不过这里是放大一个图片,最后过度到一个新的activity
+
+- ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElement, sharedElementName)    
+    > 这个实现起来就有点复杂了,共享元素动画
+
+    - 首先在跳转页面的共享元素设置**android:transitionName="transitionImg"**(其中这个名字可以随便更改)
+    - 在跳转只有准备共享的元素设置**android:transitionName="transitionImg"**(其中这个名字可以随便更改)
+    - 跳转的逻辑
+    
+    ```
+        if (Build.VERSION.SDK_INT > 20) {
+            Intent intent = new Intent(this, AnimationResultActivity.class);
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(AnimationActivity.this, iv, "transitionImg");
+            ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
+        } else {
+            startActivity(new Intent(AnimationActivity.this, AnimationResultActivity.class));
+        }
+    ```
+- ActivityOptionsCompat.makeSceneTransitionAnimation((Activity arg0, Pair<View, String>...  arg1)
+    > 这个是基于上面的动画,但是可以指定多个共享元素,可以标明多个pair对象
+    
+    ps: 如果要是使用多个共享元素的时候要用下面的代码进行创建pair
+    ```
+    Pair<View, String> imagePair = Pair.create(mImageView, getString(R.string.image));
+    ```
+
+- 上面都是预设的动画,如果你想换动画的效果的话该如何实现呢?
+    >系统预设的几种动画效果
+     
+     - change_bounds
+     - change_clip_bounds
+     - change_transition
+     - change_image_transition
+     - change_scroll
+     
+    - 首先在res目录下创建一个transition文件夹,然后在创建新的xml文件,这里举个例子:如果是change_bounds,则代码这么写
+        
+        ```
+        <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+            <changeBounds />
+            //这里也可以制动动画时长和插值器
+            <changeBounds
+                 android:interpolator="@android:interpolator/accelerate_decelerate"
+                 android:duration="500"/>            
+        </transitionSet>
+        ```
+        如果是change_clip_bounds则代码这么写
+        ```
+        <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+            <changeClipBounds />
+        </transitionSet>
+        ```
+    - 使用方法(在style.xml中配置我们的theme)
+        ```
+        <resources>
+            <style name="AppTheme" parent="Theme.AppCompat.Light">
+                <item name="android:windowContentTransitions">true</item>
+                <item name="android:windowAllowEnterTransitionOverlap">true</item>
+                <item name="android:windowAllowReturnTransitionOverlap">true</item>
+                <item name="android:windowEnterTransition">@android:transition/slide_bottom</item>
+                <item name="android:windowExitTransition">@android:transition/slide_bottom</item>
+                <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
+                <item name="android:windowSharedElementExitTransition">@transition/change_bounds</item>
+            </style>
+        </resources>
+        ```
+
+
 ##2.Theme 主题设置
 - @android:style/Theme.Material
 - @android:style/Theme.Material.Light
@@ -145,8 +242,37 @@ rect.setOnClickListener(new View.OnClickListener() {  
 - android:checked 如果菜单像带复选框(checkable属性为true),该属性表示复选框默认状态是否被选中
 - android:visible 菜单默认状态是否可见
 - android:enabled 菜单默认状态是否被激活
+- app:showAsAction 
+    - ifRoom 如果有空间的话,会显示在ToolBar上,当空间不足的时候会显示在列表上
+    - always 一直显示在ToolBar上
+    - collapseActionView (一般要配合ifRoom一起使用)声明这个操作视窗应该被折叠到一个按钮中,当用户选择这个按钮时,这个操作视窗展开否则,这个操作视窗在默认的情况下时可见的
+    - never 永远不会显示,也不会显示在列表上,但是按menu键的时候会出来
+    - withText 菜单项和它的图标一起显示
 
 > \<group\>标签的属性含义
+
+可以实现组合的显示,当组合的时候这里你可以看看实现的效果
+```
+ <item
+        android:id="@+id/Tab3"
+        android:title="组合"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/item1"
+                android:title="组合1"/>
+            <item
+                android:id="@+id/item2"
+                android:title="组合2"/>
+            <item
+                android:id="@+id/item3"
+                android:title="组合3"/>
+            <item
+                android:id="@+id/item4"
+                android:title="组合4"/>
+        </menu>
+    </item>
+```
 
 - android:checkableBehavior 设置该组件所有菜单上显示的选择组件(CHeckBox或RadioButton).如果该属性值设为all,显示CheckBox组件;如果设置single,显示RadioButton组件;如果设置none,显示正常的菜单项(不显示任何选择组件)
 
@@ -235,98 +361,78 @@ rect.setOnClickListener(new View.OnClickListener() {  
             subText.setLayoutParams(params);
             mToolBar.addView(subText);
     ```
-##6.ActivityOptionsCompat(5.0实现Activity之间跳转动画的)
-- ActivityOptionsCompat.makeCustomAnimation(context, enterResId, exitResId)
+    
+####5.2.4 添加View在ToolBar上
+- 代码添加
     ```
-            //(这个动画类似于overridePendingTransition()这个动画)
-            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.slide_bottom_in, R.anim.slide_bottom_out);
-            Intent intent = new Intent(this, SecondActivity.class);
-            ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
-    ```
-- ActivityOptionsCompat.makeScaleUpAnimation(source, startX, startY, startWidth, startHeight)(从指定位置不断方法一个View,进行过度)
-    - source 代表共享的View(以那个View为基准)
-    - startX 代表从本页面的开始X轴的位置(以source为基准点的位置)
-    - startY 代表从本页面的开始Y轴的位置(以source为基准点的位置)
-    - startWidth 弹出的Activity开始的宽度
-    - startHeight 弹出的Activity开始的高度
-    ```
-            //这个是在4.x上使用的,可实现新的Activity从某个固定的坐标以某个大小扩大至全屏
-            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(iv, width, height, 0, 0);
-            intent = new Intent(this, AnimationResultActivity.class);
-            ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());            
-    ```
-    这里有个问题注意就是,当你在RecycleView这种控件中获取子条目的位置的时候要注意,我使用的是下面的这个方法:
-    ```
-                    int[] location = new int[2];
-                    view.getLocationOnScreen(location);
-                    int width = location[0];
-                    int height = location[1];    
+            /*添加一个子视图*/
+            TextView subText = new TextView(this);
+            subText.setText("添加的子控件");
+            Toolbar.LayoutParams params = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+            params.setMargins(3, 3, 4, 4);
+            subText.setLayoutParams(params);
+            mToolBar.addView(subText);
     ```
     
-- ActivityOptionsCompat.makeThumbnailScaleUpAnimation(source, thumbnail, startX, startY)
-    > 这个动画和makeScaleUpAnimation非常相似,只不过这里是放大一个图片,最后过度到一个新的activity
-
-- ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElement, sharedElementName)    
-    > 这个实现起来就有点复杂了,共享元素动画
-
-    - 首先在跳转页面的共享元素设置**android:transitionName="transitionImg"**(其中这个名字可以随便更改)
-    - 在跳转只有准备共享的元素设置**android:transitionName="transitionImg"**(其中这个名字可以随便更改)
-    - 跳转的逻辑
+- XML文件中添加
+    ```
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary">
     
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clock"/>
+        </android.support.v7.widget.Toolbar>
     ```
-        if (Build.VERSION.SDK_INT > 20) {
-            Intent intent = new Intent(this, AnimationResultActivity.class);
-            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(AnimationActivity.this, iv, "transitionImg");
-            ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
-        } else {
-            startActivity(new Intent(AnimationActivity.this, AnimationResultActivity.class));
-        }
+####5.2.5 常见问题
+- 当在xml中设置一些属性的时候不起作用的问题(这个问题主要是因为toolBar的属性都要自定义属性才好使)
     ```
-- ActivityOptionsCompat.makeSceneTransitionAnimation((Activity arg0, Pair<View, String>...  arg1)
-    > 这个是基于上面的动画,但是可以指定多个共享元素,可以标明多个pair对象
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:toolbar="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     
-    ps: 如果要是使用多个共享元素的时候要用下面的代码进行创建pair
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_0176da"
+            toolbar:navigationIcon="@mipmap/ic_drawer_home"
+            toolbar:logo="@mipmap/ic_launcher"
+            toolbar:subtitle="456"
+            toolbar:title="123">
+    
+            <!--自定义控件-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clock" />
+        </android.support.v7.widget.Toolbar>
+    </LinearLayout>
     ```
-    Pair<View, String> imagePair = Pair.create(mImageView, getString(R.string.image));
+    
+- Menu Item 的文字颜色设置无效 (通过设置**app:popupTheme="@style/Theme.ToolBar.Base"**主题进行替换,这里注意是app开头的,你懂的)
     ```
-
-- 上面都是预设的动画,如果你想换动画的效果的话该如何实现呢?
-    >系统预设的几种动画效果
-     
-         - change_bounds
-         - change_clip_bounds
-         - change_transition
-         - change_image_transition
-         - change_scroll
-     
-    - 首先在res目录下创建一个transition文件夹,然后在创建新的xml文件,这里举个例子:如果是change_bounds,则代码这么写
-        
-        ```
-        <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
-            <changeBounds />
-            //这里也可以制动动画时长和插值器
-            <changeBounds
-                 android:interpolator="@android:interpolator/accelerate_decelerate"
-                 android:duration="500"/>            
-        </transitionSet>
-        ```
-        如果是change_clip_bounds则代码这么写
-        ```
-        <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
-            <changeClipBounds />
-        </transitionSet>
-        ```
-    - 使用方法(在style.xml中配置我们的theme)
-        ```
-        <resources>
-            <style name="AppTheme" parent="Theme.AppCompat.Light">
-                <item name="android:windowContentTransitions">true</item>
-                <item name="android:windowAllowEnterTransitionOverlap">true</item>
-                <item name="android:windowAllowReturnTransitionOverlap">true</item>
-                <item name="android:windowEnterTransition">@android:transition/slide_bottom</item>
-                <item name="android:windowExitTransition">@android:transition/slide_bottom</item>
-                <item name="android:windowSharedElementEnterTransition">@transition/change_bounds</item>
-                <item name="android:windowSharedElementExitTransition">@transition/change_bounds</item>
-            </style>
-        </resources>
-        ```
+        <style name="Theme.ToolBar.Base" parent="Theme.AppCompat.Light.NoActionBar">
+            <item name="android:textColorPrimary">@color/colorAccent</item>
+            <item name="android:textSize">20sp</item>
+        </style>
+    ```
+    
+- 最后上一个仿知乎的ToolBar设置(这里就贴出一个主要的主题,其他的上面都涉及到了))
+    ```
+        <style name="zhiHuToolBar" parent="Theme.ToolBar.Base">
+            <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.ZhiHu</item>
+        </style>
+    
+        <style name="ActionButton.Overflow.ZhiHu" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+            <item name="android:src">@mipmap/ic_overflow</item>
+        </style>
+    ```
+##6.沉浸式状态栏[Translucent System Bar](http://www.jianshu.com/p/0acc12c29c1b)

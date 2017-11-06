@@ -13,4 +13,18 @@
         <item name="windowActionBar">false</item><!--不显示Actionbar-->
     </style>
 
+    <style name="Theme.ToolBar.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.ZhiHu</item>
+    </style>
+
+
+    <style name="Theme.ToolBar.ZhiHu" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <style name="ActionButton.Overflow.ZhiHu" parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_overflow</item>
+    </style>
+
 </resources>
