@@ -435,4 +435,61 @@ rect.setOnClickListener(new View.OnClickListener() {  
             <item name="android:src">@mipmap/ic_overflow</item>
         </style>
     ```
+    
+    这里注意一点就是app:theme="@style/Theme.ToolBar.ZhiHu"和app:popupTheme="@style/Theme.ToolBar.Base"的区别
 ##6.沉浸式状态栏[Translucent System Bar](http://www.jianshu.com/p/0acc12c29c1b)
+
+> 实现沉浸式状态栏有两种办法:
+
+###1.通过style进行设置(类似于中华万年历,这种适合顶部是直接显示图片这种)
+> 首先就是要分别设置三个style,这里主要是通过设置**android:windowTranslucentStatus****android:windowTranslucentNavigation****android:statusBarColor**等三个属性进行设置
+  
+- values/style.xml(这个是正常的主题)
+      
+        ```
+        <style name="ImageTranslucentTheme" parent="AppTheme">
+            <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
+        </style>
+        ```
+- values-v19/style.xml(这个是19版本的时候使用的主题)
+    ```
+    <style name="ImageTranslucentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+     ```
+     
+- values-v21/style.xml(这个是21版本的时候使用的主题)     
+    ```
+    <style name="ImageTranslucentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+     ```
+     
+> 设置完成之后要在清单文件的Activity中设置主题,然后要在每个页面的跟标签添加一个属性**android:fitsSystemWindows="true"**至此就可以实现第一种沉浸式的状态栏了,但是这里注意一个问题就是如果使用toolBar的话那些属性在其他两个清单文件也要设置
+###2.Tab栏和系统导航栏分开设置(类似于QQ音乐,这种适合顶部是纯色的)
+> 这种相对于上面那种方式的话简单一点(但是这种实现的话,不变成页面多次绘制的问题)
+
+- values-v21/style(这个是21版本都得时候使用的主题)
+    ```
+    <style name="ColorTranslucentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:statusBarColor">@color/color_31c27c</item>
+    </style>
+    ```
+>这个也需要对 **android:fitsSystemWindows="true"** 这个属性进行设置,然后在设置toolBar的颜色或者是自己实现布局的颜色
+
+###3.一些简单的设置
+> 每个布局都需要设置 **android:fitsSystemWindows="true"** 确实很麻烦,所以使用代码设置的话是不是会很好
+    ```
+            ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+            View parentView = contentFrameLayout.getChildAt(0);
+            if (parentView != null && Build.VERSION.SDK_INT >= 14) {
+                parentView.setFitsSystemWindows(true);
+            }
+    ```
+    通过上面的代码就可以不必在每一个页面都设置 **android:fitsSystemWindows="true"** 这个属性了

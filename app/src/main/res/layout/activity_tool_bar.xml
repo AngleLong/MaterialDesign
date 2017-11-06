@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context="com.hejin.materialdesign.ToolBarActivity">
 
     <android.support.v7.widget.Toolbar
@@ -27,7 +28,7 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
-        app:popupTheme="@style/Theme.ToolBar.Base">
+        app:theme="@style/Theme.ToolBar.ZhiHu">
 
         <TextView
             android:layout_width="wrap_content"

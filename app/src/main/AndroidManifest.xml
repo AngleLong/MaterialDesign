@@ -9,19 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/ImageTranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AnimationActivity">
-        </activity>
-        <activity android:name=".ToolBarActivity">
-        </activity>
-        <activity android:name=".AnimationResultActivity">
-        </activity>
+        <activity
+            android:name=".AnimationActivity"
+            android:theme="@style/ImageTranslucentTheme"/>
+        <activity
+            android:name=".ToolBarActivity"
+            android:theme="@style/ImageTranslucentTheme"/>
+        <activity
+            android:name=".AnimationResultActivity"
+            android:theme="@style/ImageTranslucentTheme"/>
     </application>
 
 </manifest>
