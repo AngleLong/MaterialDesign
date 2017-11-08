@@ -1,4 +1,4 @@
-package com.hejin.materialdesign;
+package com.hejin.materialdesign.activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -9,6 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+
+import com.hejin.materialdesign.adapter.AnimationRVAdapter;
+import com.hejin.materialdesign.OnClickListener;
+import com.hejin.materialdesign.R;
 
 public class AnimationActivity extends AppCompatActivity implements OnClickListener {
 

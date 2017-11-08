@@ -1,4 +1,4 @@
-package com.hejin.materialdesign;
+package com.hejin.materialdesign.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.hejin.materialdesign.R;
 
 public class ToolBarActivity extends AppCompatActivity {
     private Toolbar mToolBar;

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hejin.materialdesign.activity.FABAnimationActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rlFABAll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="销售单"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/miniFab01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:src="@mipmap/ic_zhbook_show_directory"
+                app:backgroundTint="@color/colorAccent"
+                app:elevation="5dp"
+                app:fabSize="mini"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/ll01"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="销售退货"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/miniFab02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:src="@mipmap/ic_zhbook_show_directory"
+                app:backgroundTint="@color/colorAccent"
+                app:elevation="5dp"
+                app:fabSize="mini"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/ll02"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="收款单"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/miniFab03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:src="@mipmap/ic_zhbook_show_directory"
+                app:backgroundTint="@color/colorAccent"
+                app:elevation="5dp"
+                app:fabSize="mini"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/ll03"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="收款单"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/miniFab04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:src="@mipmap/ic_zhbook_show_directory"
+                app:backgroundTint="@color/colorAccent"
+                app:elevation="5dp"
+                app:fabSize="mini"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="20dp"
+        android:src="@mipmap/ic_launcher"
+        app:elevation="5dp"/>
+</android.support.design.widget.CoordinatorLayout>

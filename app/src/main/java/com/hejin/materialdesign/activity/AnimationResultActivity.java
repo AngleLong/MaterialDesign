@@ -1,7 +1,9 @@
-package com.hejin.materialdesign;
+package com.hejin.materialdesign.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.hejin.materialdesign.R;
 
 /**
  * author :  贺金龙

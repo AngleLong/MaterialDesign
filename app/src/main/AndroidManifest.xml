@@ -19,14 +19,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AnimationActivity"
+            android:name=".activity.AnimationActivity"
             android:theme="@style/ImageTranslucentTheme"/>
         <activity
-            android:name=".ToolBarActivity"
+            android:name=".activity.ToolBarActivity"
             android:theme="@style/ImageTranslucentTheme"/>
         <activity
-            android:name=".AnimationResultActivity"
+            android:name=".activity.AnimationResultActivity"
             android:theme="@style/ImageTranslucentTheme"/>
+        <activity android:name=".activity.TabLayoutActivity"/>
+        <activity
+            android:name=".activity.AppBarLayoutActivity"
+            android:theme="@style/ImageTranslucentTheme"/>
+        <activity android:name=".activity.JianShuActivity">
+        </activity>
+        <activity
+            android:name=".activity.NavigationViewActivity"
+            android:label="@string/title_activity_navigation_view"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".activity.NavigationActivity">
+        </activity>
+        <activity android:name=".activity.NestedScrollViewActivity">
+        </activity>
+        <activity android:name=".activity.TextInputLayoutActivity">
+        </activity>
+        <activity android:name=".activity.FABAnimationActivity">
+        </activity>
     </application>
 
 </manifest>

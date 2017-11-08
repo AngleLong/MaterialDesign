@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.hejin.materialdesign.ToolBarActivity">
+    tools:context="com.hejin.materialdesign.activity.ToolBarActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBar"

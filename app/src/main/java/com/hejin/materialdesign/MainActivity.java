@@ -5,12 +5,21 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
+
+import com.hejin.materialdesign.activity.AnimationActivity;
+import com.hejin.materialdesign.activity.AppBarLayoutActivity;
+import com.hejin.materialdesign.activity.FABAnimationActivity;
+import com.hejin.materialdesign.activity.JianShuActivity;
+import com.hejin.materialdesign.activity.NavigationActivity;
+import com.hejin.materialdesign.activity.NestedScrollViewActivity;
+import com.hejin.materialdesign.activity.TabLayoutActivity;
+import com.hejin.materialdesign.activity.TextInputLayoutActivity;
+import com.hejin.materialdesign.activity.ToolBarActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,13 +39,86 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/6 14:15
+     * description : 实现ActivityOptionsCompat动画页面
+     */
     public void JumpAnimation(View view) {
         Intent intent = new Intent(this, AnimationActivity.class);
         startActivity(intent);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/6 14:15
+     * description : 展示TabLayout的使用
+     */
+    public void TabLayout(View view) {
+        Intent intent = new Intent(this, TabLayoutActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/6 16:38
+     * description :  展示AppBarLayout
+     */
+    public void AppBarLayout(View view) {
+        Intent intent = new Intent(this, AppBarLayoutActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/7 9:23
+     * description : 仿简书首页的实现
+     */
+    public void JianShuHome(View view) {
+        Intent intent = new Intent(this, JianShuActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/7 13:03
+     * description : DrawerLayout实现侧滑菜单
+     */
+    public void DrawerLayout(View view) {
+        Intent intent = new Intent(this, NavigationActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/7 9:23
+     * description : NestedScrollView的使用
+     */
+    public void NestedScrollView(View view) {
+        Intent intent = new Intent(this, NestedScrollViewActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/7 9:23
+     * description : TextInputLayout的使用
+     */
+    public void TextInputLayout(View view) {
+        Intent intent = new Intent(this, TextInputLayoutActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/7 9:23
+     * description : FAB的特殊玩法
+     */
+    public void FAB(View view) {
+        Intent intent = new Intent(this, FABAnimationActivity.class);
+        startActivity(intent);
+    }
+
     public void RevealAnimator(View view) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, 0, view.getWidth());

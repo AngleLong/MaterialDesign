@@ -1,4 +1,4 @@
-package com.hejin.materialdesign;
+package com.hejin.materialdesign.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.hejin.materialdesign.OnClickListener;
+import com.hejin.materialdesign.R;
 
 /**
  * 作者 : 贺金龙
@@ -18,7 +21,7 @@ import android.widget.ImageView;
  * 类说明 :
  *  
  */
-class AnimationRVAdapter extends RecyclerView.Adapter<AnimationRVAdapter.ItemHolder> {
+public class AnimationRVAdapter extends RecyclerView.Adapter<AnimationRVAdapter.ItemHolder> {
 
     private Context mContext;
     private LayoutInflater mInflater;

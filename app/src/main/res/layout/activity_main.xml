@@ -1,30 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.NavigationView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:context="com.hejin.materialdesign.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="ToolBar"
-        android:text="实现ToolBar的一些内容"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="JumpAnimation"
-        android:text="实现ActivityOptionsCompat动画页面"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-    <View
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_margin="20dp"
-        android:background="@color/colorAccent"
-        android:onClick="RevealAnimator"/>
-</LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="ToolBar"
+            android:text="实现ToolBar的一些内容"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="JumpAnimation"
+            android:text="实现ActivityOptionsCompat动画页面"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="TabLayout"
+            android:text="TabLayout的使用"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="AppBarLayout"
+            android:text="AppBarLayout的使用"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="JianShuHome"
+            android:text="仿简书首页的实现"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="DrawerLayout"
+            android:text="DrawerLayout和NavigationView实现侧滑菜单"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="NestedScrollView"
+            android:text="NestedScrollView的使用"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="TextInputLayout"
+            android:text="TextInputLayout的使用"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="FAB"
+            android:text="FAB的特殊玩法"/>
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:background="@color/colorAccent"
+            android:onClick="RevealAnimator"/>
+    </LinearLayout>
+</android.support.design.widget.NavigationView>
