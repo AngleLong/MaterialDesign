@@ -13,10 +13,13 @@ import android.widget.Toast;
 
 import com.hejin.materialdesign.activity.AnimationActivity;
 import com.hejin.materialdesign.activity.AppBarLayoutActivity;
+import com.hejin.materialdesign.activity.BehaviorActivity;
+import com.hejin.materialdesign.activity.BottomSheetActivity;
 import com.hejin.materialdesign.activity.FABAnimationActivity;
 import com.hejin.materialdesign.activity.JianShuActivity;
 import com.hejin.materialdesign.activity.NavigationActivity;
 import com.hejin.materialdesign.activity.NestedScrollViewActivity;
+import com.hejin.materialdesign.activity.SnackBarActivity;
 import com.hejin.materialdesign.activity.TabLayoutActivity;
 import com.hejin.materialdesign.activity.TextInputLayoutActivity;
 import com.hejin.materialdesign.activity.ToolBarActivity;
@@ -116,6 +119,35 @@ public class MainActivity extends AppCompatActivity {
      */
     public void FAB(View view) {
         Intent intent = new Intent(this, FABAnimationActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/7 9:23
+     * description : FAB的特殊玩法
+     */
+    public void Behavior(View view) {
+        Intent intent = new Intent(this, BehaviorActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * author :  贺金龙
+     * create time : 2017/11/7 9:23
+     * description : SnackBar的使用
+     */
+    public void SnackBar(View view) {
+        Intent intent = new Intent(this, SnackBarActivity.class);
+        startActivity(intent);
+    }
+   /**
+     * author :  贺金龙
+     * create time : 2017/11/7 9:23
+     * description : SnackBar的使用
+     */
+    public void BottomSheet(View view) {
+        Intent intent = new Intent(this, BottomSheetActivity.class);
         startActivity(intent);
     }
 

@@ -46,6 +46,16 @@
         </activity>
         <activity android:name=".activity.FABAnimationActivity">
         </activity>
+        <activity android:name=".activity.BehaviorActivity">
+        </activity>
+        <activity android:name=".activity.EasyBehaviorActivity">
+        </activity>
+        <activity android:name=".activity.UCBehaviorActivity">
+        </activity>
+        <activity android:name=".activity.SnackBarActivity">
+        </activity>
+        <activity android:name=".activity.BottomSheetActivity">
+        </activity>
     </application>
 
 </manifest>

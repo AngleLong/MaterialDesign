@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.NavigationView
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -69,6 +69,24 @@
             android:onClick="FAB"
             android:text="FAB的特殊玩法"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="Behavior"
+            android:text="Behavior的相关内容"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="SnackBar"
+            android:text="SnackBar的使用"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="BottomSheet"
+            android:text="BottomSheet的使用"/>
+
         <View
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -76,4 +94,4 @@
             android:background="@color/colorAccent"
             android:onClick="RevealAnimator"/>
     </LinearLayout>
-</android.support.design.widget.NavigationView>
+</android.support.v4.widget.NestedScrollView>

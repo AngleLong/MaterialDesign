@@ -14,12 +14,11 @@
 ####11.[MaterialDesign系列文章(十一)NestedScrollView的使用](http://www.jianshu.com/p/8cb139a10368)
 ####12.[MaterialDesign系列文章(十二)TextInputLayout的使用](http://www.jianshu.com/p/1d75142011fb)
 ####13.[MaterialDesign系列文章(十三)FloatingActionButton的使用](http://www.jianshu.com/p/a2759dc61adb)
-####14.[SnackBar的使用]()
-####15.[BottomSheetDialog的使用]()
-####16.[FloatingActionButton的使用]()
-####17.[BottomNavigationView的使用]()
-####18.[Behacior的相关问题]()
-####19.[CoordinatorLayout的分析](http://www.jianshu.com/p/97206f5973c5---这里看这片文章)
+####14.[MaterialDesign系列文章(十四)SnackBar的使用](http://www.jianshu.com/p/f1749c69c98c)
+####15.[MaterialDesign系列文章(十五)BottomSheet的使用](http://www.jianshu.com/p/5fffddc1e97a)
+####16.[BottomNavigationView的使用]()
+####17.[MaterialDesign系列文章(十七)Behavior的相关问题](http://www.jianshu.com/p/a67c05867f2a)
+####18.[CoordinatorLayout的分析](http://www.jianshu.com/p/97206f5973c5---这里看这片文章)
 
 ***
 以上内容都是总结网上的大神们写的,我只是以自己的方式总结了一下,希望广大的读者不要介意!
