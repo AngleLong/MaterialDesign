@@ -31,6 +31,4 @@ public class BehaviorActivity extends AppCompatActivity {
     public void UCBehavior(View view) {
         startActivity(new Intent(this, UCBehaviorActivity.class));
     }
-
-
 }

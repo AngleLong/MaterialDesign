@@ -32,7 +32,7 @@
 
 - [MaterialDesign系列文章(十五)BottomSheet的使用](http://www.jianshu.com/p/5fffddc1e97a)
 
-- [BottomNavigationView的使用]()
+- [MaterialDesign系列文章(十六)BottomNavigationView的使用](http://www.jianshu.com/p/7caeedc176ac)
 
 - [MaterialDesign系列文章(十七)Behavior的相关问题](http://www.jianshu.com/p/a67c05867f2a)
 
